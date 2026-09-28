@@ -1,0 +1,35 @@
+{
+  "_meta": {
+    "purpose": "Maps our ingredient tokens to a Food_Code in thai_nutrition_hf.csv (Mahidol INMU 2015 Food Composition Tables, via BaoWio/Thai_Nutrition_Dataset on Hugging Face). Verified by downloading and inspecting the real CSV, not assumed from its dataset card.",
+    "coverage": "PARTIAL. Only the ~22 ingredient tokens below have been manually checked against the 1,005-row table this session. The rest of ingredient_allergen_map.json's ~64 tokens have not been checked yet -- do not assume they're absent, they're just unverified. Extend this file the same way: search thai_nutrition_hf.csv's English_Name column, pick the best match, record why.",
+    "why_no_auto_matching": "A naive substring match is actively wrong here -- e.g. searching \"pork\" hits 55 rows including 'noodles, wheat, instant, with seasoning, pork flavour'. Every match below was picked by hand after looking at all candidates.",
+    "why_no_per_dish_calories": "This table gives nutrients per ingredient (per 100g, standard food-composition-table convention), not per dish. Our dish data has no ingredient quantities, so we cannot responsibly compute a per-dish calorie total from this -- doing so would imply false precision. Treat matches as ingredient-level reference data only, until quantities exist.",
+    "license_note": "Source data is Mahidol INMU's Food Composition Tables (2015). The HF re-uploader tags this CC-BY-SA-4.0, but INMU's own site states 'free for non-commercial use with attribution' -- a re-uploader can't broaden rights they don't hold. Treat this as bound by INMU's stricter non-commercial+attribution terms until confirmed otherwise. See DATA_SOURCES.md."
+  },
+  "garlic": {"food_code": "N2", "matched_name": "Garlic, fresh"},
+  "peanuts": {"food_code": "C106", "matched_name": "Peanut, roasted, without seed coat"},
+  "tofu": {"food_code": "C50", "matched_name": "Soybean curd (tofu), white, soft", "confidence": "low", "note": "table has 12 tofu variants (dried/firm/soft/yellow); picked a common default"},
+  "coconut milk": {"food_code": "K23", "matched_name": "Coconut milk, fresh"},
+  "egg": {"food_code": "H19", "matched_name": "Egg, hen, whole, raw (2001-2010)", "confidence": "low", "note": "picked raw hen egg as the generic default; table also has boiled/duck/quail variants"},
+  "rice noodles": {"food_code": "A3", "matched_name": "Noodles, rice, narrow-sized strip, fresh", "confidence": "low", "note": "table also has a wide/big-sized strip variant (A4) some dishes use instead"},
+  "shallot": {"food_code": "N41", "matched_name": "Shallot, bulbs"},
+  "ginger": {"food_code": "N16", "matched_name": "Ginger, mature rhizome"},
+  "turmeric": {"food_code": "N8", "matched_name": "Turmeric"},
+  "lemongrass": {"food_code": "N18", "matched_name": "Lemongrass"},
+  "holy basil": {"food_code": "N3", "matched_name": "Holy basil, leaves"},
+  "thai basil": {"food_code": "N37", "matched_name": "Sweet basil, leaves", "confidence": "low", "note": "no exact 'Thai basil' entry in the table; sweet basil is the closest available, botanically a different variety"},
+  "basil": {"food_code": "N37", "matched_name": "Sweet basil, leaves", "confidence": "low", "note": "generic fallback, see thai_basil note"},
+  "kaffir lime leaves": {"food_code": "N35", "matched_name": "Leech lime or Kaffir lime, leaves"},
+  "fish sauce": {"food_code": "N71", "matched_name": "Sauce, fish, per 100 ml", "confidence": "low", "note": "table also has a 'grade 1' variant (N72); picked the plain one"},
+  "shrimp paste": {"food_code": "N44", "matched_name": "Paste, shrimp, fermented (Ka-pi), good quality", "confidence": "low", "note": "table has first/second class quality variants too"},
+  "shrimp": {"food_code": "G8", "matched_name": "Shrimp (sea water), tiny, raw"},
+  "chili": {"food_code": "D105", "matched_name": "Chilli pepper, raw"},
+  "dried chili": {"food_code": "N154", "matched_name": "Chilli, ground", "confidence": "low", "note": "closest available; 'ground' is not the same prep as whole dried chili"},
+
+  "_unmatched_checked": {
+    "galangal": "not found under this or 'Alpinia'/'greater galangal' -- genuinely absent from the table",
+    "dried shrimp": "only appears inside composite dish names (e.g. 'Papaya salad ... with dried shrimps'); no standalone ingredient row",
+    "tamarind paste": "table has 'Tamarind seed, roasted' and 'Tamarind, pickled' but not tamarind paste specifically",
+    "egg noodles": "table only has deep-fried egg noodle variants; no raw/boiled entry matching how it's used in Khao Soi"
+  }
+}
