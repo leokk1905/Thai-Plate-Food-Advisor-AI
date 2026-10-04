@@ -123,21 +123,43 @@ changes.
   unchecked — extend the map the same way when needed.
 - **Links**: [dataset](https://huggingface.co/datasets/BaoWio/Thai_Nutrition_Dataset) · [raw CSV](https://huggingface.co/datasets/BaoWio/Thai_Nutrition_Dataset/resolve/main/nutrition_dataset.csv)
 
-## Checked and set aside
+## In use
 
-### "Foods in Thailand" (Kaggle, `ponthakornsodchun/foods-in-thailand`)
-- **This appears to be the origin of the dataset you already have**, not a
-  new source. Fetched the page directly: identical schema (`en_name,
-  th_name, ingredients, course, province, region`) and the *exact same
-  example values* you originally gave me (`"Koi"` / `"ก้อย"` /
-  `"Beef+lime juice+fish sauce+chili+herbs"` / `"main dish"` / `"Ubon
-  Ratchathani"` / `"Northeast"`), word for word. It's also tiny (6,973 bytes
-  total, ODbL license) and its own acknowledgements section credits
-  Wikipedia as the source of the dish information — so it's Wikipedia-level
-  reliability for descriptive facts, not an authoritative food-safety source.
-  Worth comparing row-for-row against your existing database to check for
-  new dishes it might add, but treat it as the same lineage, not independent
-  corroboration.
+### "Foods in Thailand" (Kaggle, `ponthakornsodchun/foods-in-thailand`) — correction + expansion (2026-10-04)
+- **Correction to an earlier entry in this file**: I'd originally written this
+  off as "tiny, same ~16 rows you already have" based on its page metadata
+  (6,973 bytes, matching the example values you'd given me). That was wrong
+  about scope, not provenance — 6,973 bytes is the *zip* size; the actual CSV
+  inside (`thailand_foods.csv`) has **325 rows**, same schema (`en_name,
+  th_name, ingredients, course, province, region`), ODbL license, Wikipedia
+  credited as the source of dish facts in its acknowledgements. Confirmed by
+  downloading it directly (`https://www.kaggle.com/api/v1/datasets/download/ponthakornsodchun/foods-in-thailand`
+  — works without authentication) and reading the real rows, not by trusting
+  the page summary a second time.
+- **Region labels are inconsistent across the 325 rows**: `Various` (145),
+  `Unknown` (102), `Central` (42), `South` (15), `North` (12), `Northeast` (9).
+  Only the four named-region rows (78 of 325) were used — the `Various`/
+  `Unknown` rows (76% of the file) were left out rather than guessed into a
+  region.
+- **What was merged in**: all 15 South and 9 Northeast rows, after dedup
+  against what already existed (`ก้อย`/Koi, `คั่วกลิ้ง`/Kua Kling, `แกงมัสมั่น`/
+  Massaman, and `ไตปลา`/Tai Pla vs. the existing `แกงไตปลา`/Gaeng Tai Pla were
+  the same dishes under slightly different names — skipped as duplicates;
+  `ลาบ`/Lab was skipped as a near-duplicate of the existing `ลาบหมู`/Larb Moo).
+  Net addition: 12 South + 7 Northeast = 19 new dishes, bringing the dataset
+  from 16 to 35 rows.
+- **Real quality tradeoff, not glossed over**: this source's ingredient lists
+  are noticeably less specific than the original 16 hand-curated rows — many
+  entries use generic terms (`spices`, `herbs`, `meat`, `vegetables`) or even
+  nest a dish description as an "ingredient" (`Pineapple fried rice`,
+  `Biryani rice`, `Oyster omelette`). 8 of these generic/non-atomic tokens
+  were left unmatched in `ingredient_allergen_map.json` rather than guessed —
+  see the unmatched list in enrichment output. Province fields for the new
+  rows are also mostly vague (`Southern provinces`, `Coastal provinces`)
+  rather than a specific city, unlike the original curated rows
+  (`Nakhon Si Thammarat`, `Chiang Mai`) — that's what the source actually
+  says, not something I narrowed down further, since inventing a specific
+  province would be exactly the kind of fabrication this file exists to avoid.
 
 ### `thai-food-dataset` (Kaggle, `chanipornnerunchorn/thai-food-dataset`)
 - Another unofficial CSV extraction of the same INMU Thai FCD (2025 version

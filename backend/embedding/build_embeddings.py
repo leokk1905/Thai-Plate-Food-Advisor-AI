@@ -57,12 +57,21 @@ def main():
     with open(input_path, newline="", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
 
+    # `texts[i]` is the embedding input for `rows[i]` -- vectors[i] below will
+    # line up with rows[i] too. Every downstream consumer (query.py,
+    # rank_candidates_by_preference, server.py) depends on vectors and the
+    # saved `dishes` list staying in this same order; nothing re-sorts either
+    # one independently.
     texts = [dish_text(r, enriched) for r in rows]
 
     print(f"Loading embedding model: {MODEL_NAME} (one-time download, then fully local/offline)...")
     model = SentenceTransformer(MODEL_NAME)
 
     print(f"Embedding {len(texts)} dishes...")
+    # normalize_embeddings=True makes every vector unit-length, which means a
+    # plain dot product between two vectors IS their cosine similarity --
+    # that's what lets query.py/rank_candidates_by_preference use `vectors @
+    # query_vec` directly instead of dividing by vector norms every time.
     vectors = model.encode(texts, normalize_embeddings=True, show_progress_bar=True)
 
     np.save(VECTORS_OUT, vectors.astype(np.float32))
@@ -72,7 +81,7 @@ def main():
                 "source_file": os.path.basename(input_path),
                 "enriched": enriched,
                 "model": MODEL_NAME,
-                "dishes": rows,
+                "dishes": rows,  # full dish dicts, not just names -- lets consumers show/filter on allergens etc. without re-reading the CSV
             },
             f,
             ensure_ascii=False,

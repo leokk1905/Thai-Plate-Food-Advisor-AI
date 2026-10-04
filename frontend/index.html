@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thai Plate -- Prototype Test Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Mitr:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbf3e2;
+    --panel: #fffdf8;
+    --border: #e6d4a0;
+    --text: #2c1c14;
+    --muted: #7a6450;
+    --accent: #a6202c;
+    --accent-dark: #7e1621;
+    --gold: #c9972c;
+    --jade: #0f6b56;
+    --warn-bg: #fff1dc;
+    --warn-border: #d98c2b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Mitr', -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    background-image: radial-gradient(circle at 10% 10%, rgba(201,151,44,0.08), transparent 40%),
+                       radial-gradient(circle at 90% 20%, rgba(166,32,44,0.07), transparent 35%);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  h1, h2 { font-family: 'Chonburi', 'Mitr', serif; }
+  header {
+    background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+    color: #fff8ec;
+    padding: 28px 16px 20px;
+  }
+  header .inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  header h1 {
+    margin: 0 0 6px;
+    font-size: 1.9rem;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  }
+  header p { color: #f6dcc2; margin: 0; font-size: 0.9rem; }
+  .thai-divider {
+    height: 10px;
+    background: repeating-linear-gradient(135deg, var(--gold) 0 10px, var(--accent) 10px 20px);
+    opacity: 0.85;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 8px 16px 48px;
+  }
+  section.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--jade);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 24px;
+    box-shadow: 0 2px 8px rgba(124, 85, 20, 0.08);
+  }
+  section.panel h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+  }
+  label { font-weight: 600; font-size: 0.9rem; display: block; margin-top: 12px; }
+  input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    margin-top: 4px;
+    background: #fffefb;
+  }
+  input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+  }
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-top: 6px;
+  }
+  .checkbox-group label {
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  button {
+    background: var(--accent);
+    color: #fff8ec;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-family: 'Mitr', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-top: 16px;
+    letter-spacing: 0.02em;
+    transition: background 0.15s ease;
+  }
+  button:hover:not(:disabled) { background: var(--accent-dark); }
+  button:disabled { opacity: 0.6; cursor: wait; }
+  .result-card {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-top: 10px;
+    background: #fffdf6;
+  }
+  .result-card .score { color: var(--jade); font-weight: 600; font-size: 0.85rem; }
+  .result-card .ingredients { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+  .narrative {
+    white-space: pre-wrap;
+    margin-top: 14px;
+    font-size: 0.95rem;
+  }
+  .error-box {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-top: 12px;
+    font-size: 0.9rem;
+  }
+  .limitations {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-top: 4px solid var(--accent);
+  }
+  .limitations h2 { color: var(--accent-dark); }
+  .limitations ul { margin: 8px 0 0; padding-left: 20px; }
+  .limitations li { margin-bottom: 10px; }
+  .muted { color: var(--muted); font-size: 0.85rem; }
+  .pill {
+    display: inline-block;
+    background: #f3e6c4;
+    color: var(--accent-dark);
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 0.8rem;
+    margin-right: 6px;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 24px 16px 40px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <h1>Thai Plate</h1>
+    <p>Prototype test page -- Thai food search &amp; itinerary generator</p>
+    <p id="meta-line">Loading dataset info...</p>
+  </div>
+</header>
+<div class="thai-divider"></div>
+
+<main>
+
+  <section class="panel">
+    <h2>Free-text dish search</h2>
+    <p class="muted">Local embedding similarity -- no API key used, no cost, instant. Good for taste/style matching, not for strict requirements (see limitations below).</p>
+    <label for="search-input">Ask about Thai food</label>
+    <input type="text" id="search-input" placeholder='e.g. "something sour and spicy" or "dishes like Pad Thai"'>
+    <button id="search-btn">Search</button>
+    <div id="search-results"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Generate an itinerary</h2>
+    <p class="muted">Hard-filters the dish list first (deterministic, allergen-safe), then calls the LLM via OpenRouter to write the narrative. This step costs a small amount per request.</p>
+
+    <label>Regions (blank = any)</label>
+    <div class="checkbox-group" id="region-group"></div>
+
+    <label for="days-input">Days</label>
+    <input type="number" id="days-input" value="2" min="1" max="7">
+
+    <label>Allergens to exclude</label>
+    <div class="checkbox-group" id="allergen-group"></div>
+
+    <label for="spice-select">Max spice level</label>
+    <select id="spice-select">
+      <option value="1">1 - no spice</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5" selected>5 - anything</option>
+    </select>
+
+    <label for="diet-select">Dietary requirement</label>
+    <select id="diet-select">
+      <option value="none" selected>None</option>
+      <option value="vegan">Vegan</option>
+      <option value="vegetarian">Vegetarian</option>
+      <option value="pescatarian">Pescatarian</option>
+    </select>
+
+    <label for="craving-input">What are you craving? (optional -- this is what turns retrieval on)</label>
+    <input type="text" id="craving-input" placeholder='e.g. "something sour and funky" or "light and comforting"'>
+    <p class="muted" style="margin-top:4px;">
+      Leave this blank and the itinerary picks randomly from whatever passes your filters above.
+      Fill it in and the pipeline becomes RAG: the dishes that pass your filters get
+      <strong>re-ranked by embedding similarity to what you typed</strong> (the retrieval step),
+      and the LLM is given that ranked, scored list to write from (the generation step) --
+      see "Retrieved candidates" below the result once you run it.
+    </p>
+
+    <button id="itinerary-btn">Generate itinerary</button>
+    <div id="itinerary-output"></div>
+  </section>
+
+  <section class="panel limitations">
+    <h2>Known limitations -- read before drawing conclusions from this page</h2>
+    <ul>
+      <li><strong>Small sample dataset.</strong> This runs on a demo set of a few dozen dishes, not a real production database. Results are illustrative of how the system behaves, not a real guide to Thai cuisine.</li>
+      <li><strong>Allergen/diet tags are only as complete as the ingredient lookup table.</strong> They come from a hand-built mapping of ingredient names to allergen categories. Some ingredients (generic terms like "spices" or "vegetables" from one of the data sources) aren't in that table yet -- those dishes are <em>not</em> confirmed allergen-free, they're simply untagged. <strong>Do not use this for a real allergy decision.</strong></li>
+      <li><strong>Spice level and flavor profile are AI-generated estimates</strong>, not verified facts -- they come from a language model's best guess, not a reference source.</li>
+      <li><strong>Embedding similarity (used by the free-text search above, and by the itinerary's optional "what are you craving" field) is unreliable for hard constraints.</strong> It's good at matching taste and style ("sour and spicy"), but testing has shown it can rank a dish wrong for strict categories like "vegetarian" or a specific region. That's exactly why the itinerary generator always runs the deterministic allergen/diet/region/spice filter <em>first</em> and only lets embedding similarity re-rank <em>within</em> that already-safe set -- it never lets similarity scores override a safety constraint. The plain search box above has no such filter, so don't treat its results as allergen-safe.</li>
+      <li><strong>Narrow filters can repeat the same dish across days.</strong> If very few dishes match (e.g. a strict diet combined with one region), the itinerary may show the same dish more than once instead of warning you about limited variety.</li>
+      <li><strong>This is a local prototype.</strong> It isn't deployed publicly, has no accounts, and nothing you enter here is saved anywhere.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>Thai Plate -- local prototype, not a deployed product.</footer>
+
+<script>
+// Runs once on page load (see loadMeta() call at the bottom of this script).
+// Everything shown here -- dish count, region list, allergen list -- comes
+// from the live /api/meta endpoint rather than being hardcoded in this file,
+// so the page can't silently drift out of sync with the actual dataset the
+// way a hand-maintained list could.
+async function loadMeta() {
+  const res = await fetch('/api/meta');
+  const meta = await res.json();
+
+  document.getElementById('meta-line').textContent =
+    `${meta.dish_count} dishes loaded | regions: ${meta.regions.join(', ')} | ` +
+    (meta.llm_configured ? 'LLM configured' : 'LLM NOT configured -- itinerary generation will fail');
+
+  const regionGroup = document.getElementById('region-group');
+  meta.regions.forEach(r => {
+    const id = 'region-' + r;
+    regionGroup.insertAdjacentHTML('beforeend',
+      `<label><input type="checkbox" value="${r}" id="${id}"> ${r}</label>`);
+  });
+
+  const allergenGroup = document.getElementById('allergen-group');
+  meta.allergens.forEach(a => {
+    const id = 'allergen-' + a;
+    allergenGroup.insertAdjacentHTML('beforeend',
+      `<label><input type="checkbox" value="${a}" id="${id}"> ${a}</label>`);
+  });
+}
+
+// Every piece of text from the server (dish names, ingredients, the LLM's
+// narrative) goes through this before being inserted as HTML, since all of
+// it is interpolated into template strings below. Setting textContent and
+// reading back innerHTML is a standard trick to get the browser's own HTML
+// escaping for free, instead of hand-writing a replace() for every special
+// character -- without this, a dish name or user query containing something
+// like "<script>" would be interpreted as HTML instead of displayed as text.
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Hits /api/search -- pure local embedding similarity on the server, no LLM
+// call, no cost. See the "Known limitations" section on the page itself for
+// why this is good for taste/style queries but not for hard requirements.
+async function runSearch() {
+  const query = document.getElementById('search-input').value;
+  const btn = document.getElementById('search-btn');
+  const out = document.getElementById('search-results');
+  if (!query.trim()) return;
+
+  btn.disabled = true;
+  out.innerHTML = '<p class="muted">Searching...</p>';
+
+  try {
+    const res = await fetch('/api/search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query })
+    });
+    const data = await res.json();
+    if (!data.results.length) {
+      out.innerHTML = '<p class="muted">No results.</p>';
+      return;
+    }
+    out.innerHTML = data.results.map(r => `
+      <div class="result-card">
+        <strong>${escapeHtml(r.dish.en_name)}</strong> (${escapeHtml(r.dish.th_name)})
+        <span class="score">score ${r.score}</span>
+        <div class="muted">${escapeHtml(r.dish.course)} -- ${escapeHtml(r.dish.province)}, ${escapeHtml(r.dish.region)}</div>
+        <div class="ingredients">${escapeHtml(r.dish.ingredients.replace(/\+/g, ', '))}</div>
+      </div>
+    `).join('');
+  } catch (e) {
+    out.innerHTML = `<div class="error-box">Request failed: ${escapeHtml(String(e))}</div>`;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// Hits /api/itinerary, which always runs the deterministic allergen/diet/
+// region/spice filter server-side first. Leaving preference_text blank
+// sends "" to the server, which it treats as "no craving given" and skips
+// the RAG re-ranking entirely (see server.py's branch on preference_text) --
+// typing something there is what turns this into a two-stage retrieval ->
+// generation (RAG) call instead of a plain filter -> generation call.
+async function runItinerary() {
+  const btn = document.getElementById('itinerary-btn');
+  const out = document.getElementById('itinerary-output');
+
+  const regions = Array.from(document.querySelectorAll('#region-group input:checked')).map(el => el.value);
+  const exclude_allergens = Array.from(document.querySelectorAll('#allergen-group input:checked')).map(el => el.value);
+  const days = parseInt(document.getElementById('days-input').value, 10) || 1;
+  const max_spice = parseInt(document.getElementById('spice-select').value, 10);
+  const diet = document.getElementById('diet-select').value;
+  const preference_text = document.getElementById('craving-input').value.trim();
+
+  btn.disabled = true;
+  out.innerHTML = '<p class="muted">Generating (this calls the LLM, may take a few seconds)...</p>';
+
+  try {
+    const res = await fetch('/api/itinerary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        regions: regions.length ? regions : null,
+        exclude_allergens,
+        days,
+        max_spice,
+        diet,
+        preference_text
+      })
+    });
+    const data = await res.json();
+    if (data.error) {
+      out.innerHTML = `<div class="error-box">${escapeHtml(data.error)}</div>`;
+      return;
+    }
+
+    // data.retrieved only exists in the response when the server took the
+    // RAG path (i.e. preference_text was non-empty) -- its presence here is
+    // literally how the page knows whether to show the retrieval panel at all.
+    let retrievedHtml = '';
+    if (data.retrieved) {
+      retrievedHtml = `
+        <div class="result-card">
+          <strong>Retrieved candidates (retrieval step output)</strong>
+          <p class="muted" style="margin:4px 0 8px;">Ranked by embedding similarity to "${escapeHtml(preference_text)}" -- this is exactly what was handed to the LLM as grounding context.</p>
+          ${data.retrieved.map(r => `<span class="pill">${escapeHtml(r.en_name)}: ${r.score}</span>`).join(' ')}
+        </div>
+      `;
+    }
+
+    out.innerHTML = `
+      <p class="muted">${data.matched_dish_count} dish(es) matched your filters${data.retrieved ? ' -- re-ranked by your craving below' : ''}.</p>
+      ${retrievedHtml}
+      <div class="narrative">${escapeHtml(data.narrative)}</div>
+    `;
+  } catch (e) {
+    out.innerHTML = `<div class="error-box">Request failed: ${escapeHtml(String(e))}</div>`;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// wire up the two buttons (plus Enter-to-search), then populate the page
+// with live data -- loadMeta() is the only thing that runs automatically on
+// load; everything else waits for a user click.
+document.getElementById('search-btn').addEventListener('click', runSearch);
+document.getElementById('search-input').addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
+document.getElementById('itinerary-btn').addEventListener('click', runItinerary);
+
+loadMeta();
+</script>
+
+</body>
+</html>

@@ -68,11 +68,17 @@ def normalize_token(token):
 def load_allergen_map():
     with open(MAP_PATH, encoding="utf-8") as f:
         data = json.load(f)
-    data.pop("_meta", None)
+    data.pop("_meta", None)  # _meta is documentation for humans reading the JSON file, not a real ingredient entry
     return data
 
 
 def lookup_allergens_and_diet(ingredients_str, allergen_map):
+    """The deterministic half of enrichment -- no model call in this
+    function at all. Every ingredient token either matches a known entry in
+    ingredient_allergen_map.json (and contributes its allergens/diet
+    exclusions) or it doesn't, in which case it's reported as unmatched
+    rather than guessed at. See ingredient_allergen_map.json's own "_meta"
+    block for where that map's categories came from."""
     tokens = [normalize_token(t) for t in ingredients_str.split("+") if t.strip()]
 
     allergens = set()
@@ -90,6 +96,11 @@ def lookup_allergens_and_diet(ingredients_str, allergen_map):
         if entry.get("confidence") == "low":
             low_confidence_notes.append(f"{token}: {entry.get('note', 'low confidence')}")
 
+    # A dish qualifies for a diet unless some ingredient explicitly excludes
+    # it -- e.g. a dish made of nothing but vegetables accumulates zero
+    # exclusions, so it ends up tagged vegan AND vegetarian AND pescatarian,
+    # which is correct: vegan is a subset of what vegetarian/pescatarian
+    # allow, so anything vegan automatically qualifies as both of those too.
     all_diets = {"vegan", "vegetarian", "pescatarian"}
     possible_diets = sorted(all_diets - excluded_diets) or ["none"]
 
@@ -102,6 +113,12 @@ def lookup_allergens_and_diet(ingredients_str, allergen_map):
 
 
 def infer_flavor(client, en_name, ingredients, course):
+    """The LLM half of enrichment -- only ever asked for spice_level and
+    flavor_profile, which genuinely have no reference dataset to look up
+    (unlike allergens). tool_choice forces the model to respond through the
+    record_flavor function instead of free text, so the result is always
+    parseable structured JSON rather than something like "pretty spicy, I'd
+    say a 4" that main() would then have to parse itself."""
     completion = client.chat.completions.create(
         model=MODEL,
         max_tokens=512,
@@ -115,6 +132,9 @@ def infer_flavor(client, en_name, ingredients, course):
     tool_calls = completion.choices[0].message.tool_calls
     if not tool_calls:
         raise RuntimeError(f"No tool call returned for {en_name}")
+    # arguments comes back as a JSON *string* (that's how tool-calling args
+    # are transmitted), not already-parsed -- json.loads turns it back into
+    # the {"spice_level": ..., "flavor_profile": [...]} dict main() expects.
     return json.loads(tool_calls[0].function.arguments)
 
 
@@ -129,13 +149,16 @@ def main(in_path, out_path):
     with open(in_path, newline="", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
 
+    # keep every original column (en_name, ingredients, etc.) and append the
+    # new enrichment columns -- this is additive, nothing from the input is
+    # dropped or overwritten.
     fieldnames = list(rows[0].keys()) + [
         "allergens", "dietary_tags", "spice_level", "flavor_profile",
         "unmatched_ingredients", "low_confidence_notes",
         "allergen_source", "flavor_source",
     ]
 
-    all_unmatched = set()
+    all_unmatched = set()  # tracked across ALL dishes so the end-of-run summary only lists each unmatched token once
 
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -143,17 +166,25 @@ def main(in_path, out_path):
         for row in rows:
             print(f"Enriching: {row['en_name']}...")
 
+            # deterministic lookup first (no API call, no cost)...
             lookup = lookup_allergens_and_diet(row["ingredients"], allergen_map)
             all_unmatched.update(lookup["unmatched_ingredients"])
 
+            # ...then the one real API call per dish, for the two fields
+            # that genuinely need a model's judgment.
             flavor = infer_flavor(client, row["en_name"], row["ingredients"], row["course"])
 
+            # lists get joined back into "+"-separated strings to match the
+            # CSV convention already used for `ingredients` in the input data
             row["allergens"] = "+".join(lookup["allergens"])
             row["dietary_tags"] = "+".join(lookup["dietary_tags"])
             row["unmatched_ingredients"] = "+".join(lookup["unmatched_ingredients"])
             row["low_confidence_notes"] = "; ".join(lookup["low_confidence_notes"])
             row["spice_level"] = flavor["spice_level"]
             row["flavor_profile"] = "+".join(flavor["flavor_profile"])
+            # provenance columns -- so anyone looking at the output later can
+            # tell which fields are a verified lookup vs. a model's guess
+            # without having to re-read this script to find out
             row["allergen_source"] = "keyword_lookup:ingredient_allergen_map.json"
             row["flavor_source"] = "llm_inferred_unverified"
             writer.writerow(row)

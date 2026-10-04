@@ -1,0 +1,523 @@
+[
+  {
+    "case": {
+      "id": "baseline_easy",
+      "description": "Easy case, no hard constraints beyond region -- sanity check both arms can do the basic job.",
+      "regions": [
+        "Central"
+      ],
+      "days": 2,
+      "exclude_allergens": [],
+      "max_spice": 5,
+      "diet": "none",
+      "preference_text": ""
+    },
+    "our_model": {
+      "narrative": "# Your 2-Day Central Thai Food Journey: Bangkok\n\n## Day 1: Bold Bangkok Classics\n\n**Khao Kluk Kapi (ข้าวคลุกกะปิ)**\nThis is Bangkok's beloved shrimp paste rice dish, where rice is mixed thoroughly with pungent shrimp paste, then served alongside dried shrimp, pork, lime, and chili for balance. It's a true Central Thai staple that showcases the region's love of umami-rich, funky flavors balanced with bright sourness. Notice how every bite requires mixing — the components are meant to be combined with your spoon, not eaten separately, so the salty-sour-spicy balance hits all at once.\n\n**Pad Thai (ผัดไทย)**\nPerhaps Thailand's most internationally famous export, this stir-fried rice noodle dish combines shrimp, tofu, egg, and peanuts with a tamarind-fish sauce base. It's a quintessential Bangkok street food that perfectly represents the Central region's skill with wok-fried noodle dishes. Pay attention to the texture contrast — soft noodles against crunchy bean sprouts and peanuts — and the sweet-sour-salty harmony that makes it so addictive.\n\n**Pad Kra Pao (ผัดกะeพรา)**\nA fiery, fragrant stir-fry of ground pork with holy basil, garlic, and chili, often crowned with a fried egg. This dish is everyday Bangkok comfort food, found in kitchens and street stalls alike across the Central region. Notice the distinctive aroma of holy basil (different from Thai basil) — it's peppery and slightly medicinal, giving this dish its signature punch alongside the savory fish sauce base.\n\n## Day 2: Soothing Soups & Sweet Treats\n\n**Kanom Krok (ขนมครก)**\nStart your day gently with these bite-sized coconut rice flour pancakes, cooked in a special indented pan until the edges turn crispy while the centers stay soft and custardy. This humble sweet-savory snack is a beloved Bangkok street food tradition. Notice the textural magic — crisp shell, creamy coconut center — and the subtle sweetness balanced by a whisper of scallion.\n\n**Tom Kha Gai (ต้มข่าไก่)**\nA gentler cousin to spicier Thai soups, this coconut milk-based chicken soup gets its complex aromatic profile from galangal, lemongrass, and kaffir lime leaves. It represents the Central region's mastery of balancing rich coconut creaminess with bright herbal notes. Notice how the galangal (not ginger!) gives a distinct citrusy-peppery note, while the soup stays mild enough to sip comfortably.\n\n**Tom Yum Goong (ต้มยำกุ้ง)**\nFinish with Thailand's most iconic soup — a clear, fiery broth loaded with shrimp, mushrooms, and the classic trio of lemongrass, galangal, and kaffir lime leaves. This is Bangkok's signature dish, embodying the Central region's love of bold sour-spicy-umami combinations. Notice the clean, sharp sourness from lime juice cutting through the spice — it's meant to wake up your palate, best enjoyed hot with rice on the side.\n\n---\n*Enjoy your Bangkok food journey — these six dishes offer a wonderful cross-section of Central Thailand's culinary range, from pungent and bold to soothing and aromatic!*",
+      "error": null,
+      "matched_dish_count": 6,
+      "usage": {
+        "prompt_tokens": 900,
+        "completion_tokens": 1182,
+        "total_tokens": 2082
+      },
+      "latency_seconds": 14.07,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {},
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Tom Yum Goong",
+          "Pad Thai",
+          "Pad Kra Pao",
+          "Tom Kha Gai",
+          "Khao Kluk Kapi",
+          "Kanom Krok"
+        ],
+        "day_headings_found": 2,
+        "regions_mentioned": [
+          "Central"
+        ],
+        "no_output": false
+      },
+      "cost_usd": 0.01362
+    },
+    "baseline": {
+      "narrative": "# 2-Day Thai Food Adventure in Central Thailand\n\n## Day 1: Bangkok\n\n**Pad Krapow Moo (Stir-fried Pork with Holy Basil)**\nThis iconic Bangkok street food features minced pork cooked with fragrant holy basil, garlic, and chilies, served over rice with a fried egg on top. It's the quintessential central Thai dish and represents the bold, fiery flavors Bangkok is famous for. Look for the beautiful purple-hued holy basil leaves that give this dish its distinctive aroma and slight peppery taste.\n\n**Tom Yum Goong (Spicy Shrimp Soup)**\nA legendary Thai soup combining shrimp with lemongrass, galangal, kaffir lime leaves, and bird's eye chilies in a tangy, intensely flavorful broth. Central Thailand's signature soup showcases the region's mastery of balancing heat with aromatic complexity. Notice how the broth's color deepens with each spoonful of chilies—you can adjust the spice level as you eat!\n\n## Day 2: Bangkok (Day Trip Vibes)\n\n**Gaeng Phed Ped Yang (Red Curry with Duck)**\nRich and vibrant, this curry combines tender duck with red curry paste, bamboo shoots, and basil in coconut milk for maximum indulgence. It's a restaurant favorite that demonstrates central Thai cooking's sophisticated approach to heat and creaminess together. Watch for the silky texture of the coconut sauce clinging perfectly to the tender duck meat.",
+      "error": null,
+      "prompt_used": "You are a Thai food travel guide. Write a short, friendly day-by-day\nThai food itinerary for a traveler with these requirements:\n\n- Regions to visit: Central\n- Trip length: 2 day(s)\n- Allergens to strictly avoid: none\n- Maximum spice level: 5 out of 5\n- Dietary requirement: none\n\n\nFor each day, recommend 2-3 real Thai dishes that satisfy ALL of the above\nrequirements. For each dish, write 2-4 sentences: what it is, why it fits the\nprovince/region, and one thing to notice about it. Do not claim any specific\nrestaurant, vendor, or price -- just what dishes to seek out.",
+      "usage": {
+        "prompt_tokens": 166,
+        "completion_tokens": 357,
+        "total_tokens": 523
+      },
+      "latency_seconds": 4.44,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {},
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Tom Yum Goong"
+        ],
+        "day_headings_found": 2,
+        "regions_mentioned": [
+          "Central"
+        ],
+        "no_output": false
+      },
+      "cost_usd": 0.001951
+    }
+  },
+  {
+    "case": {
+      "id": "shellfish_fish_allergy",
+      "description": "The hardest realistic allergy case for Thai food -- fish sauce and shrimp paste are in most savory dishes.",
+      "regions": null,
+      "days": 3,
+      "exclude_allergens": [
+        "crustacean_shellfish",
+        "fish"
+      ],
+      "max_spice": 5,
+      "diet": "none",
+      "preference_text": ""
+    },
+    "our_model": {
+      "narrative": "# Your 3-Day Thai Food Journey (Shellfish & Fish-Free)\n\nGreat news for this trip — Thailand's regional cooking traditions give us plenty of delicious, flavorful dishes that don't rely on fish sauce or shrimp paste. Here's your day-by-day plan:\n\n## Day 1: Northeast Meets South\n\n**Tom Saep (ต้มแซ่บ)** — This is a beloved spicy-sour soup from the Northeast (Isaan) region, built on a base of herbs, meat, and bold spices. It's the Isaan answer to comfort food on a rainy day. Notice the layered sourness and umami depth — it comes from herbs and spice blending, not fish sauce, so you get that signature Isaan punch safely.\n\n**Kai Koa Lae (ไก่กอและ)** — Hailing from Pattani in the South, this chicken dish simmers in coconut milk with turmeric and warming spices, reflecting the Malay-influenced flavors of southern Thai cuisine. It's rich, golden, and fragrant. Pay attention to the turmeric's earthy color and how the coconut milk mellows the spice into a rounded sweetness.\n\n**Soi Ju (ซอยจุ๊)** — Another Isaan classic, this raw beef salad is tossed with herbs and garlic for a sharp, vibrant bite. It's traditionally a social, shareable dish enjoyed with sticky rice. Notice the textural contrast — tender raw beef against crunchy herbs — and the citrusy sourness that cuts through the richness.\n\n## Day 2: South to North\n\n**Kao Mok (ข้าวหมก)** — Thailand's take on biryani, from the southern provinces, this spiced rice dish is cooked with chicken and fragrant spices, showing the Muslim-Thai culinary influence in the South. Notice how the rice itself is infused with spice rather than just the meat — a one-pot flavor bomb.\n\n**Kanom Krok (ขนมครก)** — A beloved Bangkok street snack, these little coconut-rice flour pancakes are cooked in a special dimpled griddle pan. Sweet, creamy, and topped with scallion, they're a perfect light palate-cleanser after savory dishes. Notice the textural contrast between the crispy edges and the soft, custardy center.\n\n**Nam Prik Ong (น้ำพริกอ่อง)** — A Northern Thai specialty, this ground pork and tomato chili dip is packed with garlic and shallot for deep savory flavor. It's traditionally eaten with fresh vegetables and sticky rice for dipping. Notice the sour-spicy balance from the tomato and dried chili working together.\n\n## Day 3: Southern Comfort, Central Classic\n\n**Loba (โลบะ)** — A southern Thai pork dish infused with herbs and spices, Loba reflects the slow-braised, spice-forward cooking style common in the South. Notice how the spices penetrate the meat for a deeply savory, warming result.\n\n**Moo Hong (หมูฮ้อง)** — This southern stewed pork belly dish is slow-cooked until tender, with herbs and spices creating a salty-umami richness. It's comfort food at its finest. Notice the melt-in-your-mouth texture of the pork belly and the deep caramelized flavor from the stewing process.\n\n**Tom Kha Gai (ต้มข่าไก่)** — Finish your trip with this iconic Bangkok/Central dish — chicken simmered in coconut milk with galangal, lemongrass, and kaffir lime leaves. It's a gentler, milder soup to end on. Notice the fragrant aromatics floating in the broth and the bright lime juice finish that lifts the creamy coconut base.\n\nEnjoy your flavorful, allergy-safe journey through Thailand's regional kitchens! 🇹🇭",
+      "error": null,
+      "matched_dish_count": 16,
+      "usage": {
+        "prompt_tokens": 1061,
+        "completion_tokens": 1305,
+        "total_tokens": 2366
+      },
+      "latency_seconds": 14.82,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {
+          "crustacean_shellfish": [
+            "shrimp",
+            "shrimp paste"
+          ],
+          "fish": [
+            "fish sauce",
+            "fish"
+          ]
+        },
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Nam Prik Ong",
+          "Tom Kha Gai",
+          "Kanom Krok",
+          "Kai Koa Lae",
+          "Kao Mok",
+          "Moo Hong",
+          "Loba",
+          "Soi Ju",
+          "Tom Saep"
+        ],
+        "day_headings_found": 3,
+        "regions_mentioned": [],
+        "no_output": false
+      },
+      "cost_usd": 0.015172
+    },
+    "baseline": {
+      "narrative": "# 3-Day Thai Food Journey: Bangkok & Chiang Mai\n\n## Day 1: Bangkok (Central Thailand)\n\n**Pad Krapow Moo (Stir-fried Pork with Holy Basil)**\nThis iconic street food features minced pork cooked with fragrant holy basil, chilies, and garlic—a Bangkok staple that embodies central Thai flavors. The dish is naturally free from seafood while delivering bold, aromatic heat. Notice how the basil leaves wilt slightly and release their peppery essence into the meat, creating an unforgettable aroma.\n\n**Massaman Gai (Massaman Curry with Chicken)**\nA rich, mildly spiced curry with Muslim-influenced roots, this dish combines chicken, potatoes, and peanuts in a warming coconut broth. It's creamy and complex without relying on fish products, making it perfect for your dietary needs. Pay attention to the balance of sweet, savory, and nutty flavors from the peanuts and spices like cardamom and cinnamon.\n\n## Day 2: Chiang Mai (Northern Thailand)\n\n**Larb Gai (Spicy Minced Chicken Salad)**\nThis legendary northern dish mixes ground chicken with lime juice, dried chilies, and fresh herbs for a tangy, fiery kick. Larb is a Chiang Mai institution and can be customized to your spice preference while remaining completely shellfish and fish-free. Watch for the toasted rice powder sprinkled on top—it adds a nutty texture that defines authentic larb.\n\n**Gaeng Hang Lay (Burmese Pork Belly Curry)**\nNorthern Thailand's signature pork curry features tender, slow-cooked belly meat in a spiced, slightly sweet broth with ginger and turmeric. This Burmese-inspired dish showcases Chiang Mai's unique culinary heritage and is naturally free from seafood ingredients. Notice the silky texture of the pork as it practically melts in your mouth.\n\n## Day 3: Chiang Mai Continued\n\n**Sai Oua (Northern Thai Sausage)**\nA legendary Chiang Mai specialty, this herb-filled pork sausage is seasoned with lemongrass, galangal, and chilies, then grilled until fragrant. Street vendors and markets throughout Chiang Mai serve this as a breakfast or snack item that represents northern identity. Observe how the casing chars slightly on the outside while the interior stays juicy and aromatic.\n\n---\n\n*Enjoy your spice-filled adventure! Remember to say \"pet nit noi\" (a little spicy) or \"pet mak\" (very spicy) to adjust heat levels to your comfort.*",
+      "error": null,
+      "prompt_used": "You are a Thai food travel guide. Write a short, friendly day-by-day\nThai food itinerary for a traveler with these requirements:\n\n- Regions to visit: any region in Thailand\n- Trip length: 3 day(s)\n- Allergens to strictly avoid: crustacean_shellfish, fish\n- Maximum spice level: 5 out of 5\n- Dietary requirement: none\n\n\nFor each day, recommend 2-3 real Thai dishes that satisfy ALL of the above\nrequirements. For each dish, write 2-4 sentences: what it is, why it fits the\nprovince/region, and one thing to notice about it. Do not claim any specific\nrestaurant, vendor, or price -- just what dishes to seek out.",
+      "usage": {
+        "prompt_tokens": 177,
+        "completion_tokens": 630,
+        "total_tokens": 807
+      },
+      "latency_seconds": 7.18,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {
+          "fish": [
+            "fish"
+          ]
+        },
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Sai Oua",
+          "Massaman Curry"
+        ],
+        "day_headings_found": 3,
+        "regions_mentioned": [],
+        "no_output": false
+      },
+      "cost_usd": 0.003327
+    }
+  },
+  {
+    "case": {
+      "id": "vegan_south",
+      "description": "Narrow diet+region combo -- South Thai cooking leans heavily on fish sauce/shrimp paste, so vegan options may be scarce or absent.",
+      "regions": [
+        "South"
+      ],
+      "days": 2,
+      "exclude_allergens": [],
+      "max_spice": 5,
+      "diet": "vegan",
+      "preference_text": ""
+    },
+    "our_model": {
+      "narrative": "# South Thailand Vegan Food Itinerary (2 Days)\n\nA quick note before we dive in: South Thai cooking relies heavily on fish sauce and shrimp paste, so vegan choices in this region are genuinely limited. The two dishes below are your reliable anchors for both days — simple, but satisfying and authentically Southern.\n\n## Day 1\n\n**Kao Phat Sapparot (ข้าวผัดสับปะรด) — Pineapple Fried Rice**\nThis vibrant fried rice combines rice with pineapple, soy sauce, and garlic, giving it a sweet-salty-umami balance that's common in the coastal provinces of the South, where pineapple is grown abundantly and used generously in savory cooking. It's mild on the spice scale (2/5), making it an easy, comforting entry point into Southern flavors. Notice the contrast between the warm, savory rice and the juicy bursts of sweet pineapple folded throughout.\n\n**Kao Yam (ข้าวยำ) — Southern Rice Salad**\nKao Yam is a refreshing rice salad loaded with vegetables and fresh herbs, tossed together for a sour-salty-umami punch that's a signature of Southern Thai home cooking. It reflects the region's love of bold, herb-forward dishes that balance heavier meals. Pay attention to the texture — it's meant to be mixed thoroughly just before eating so every bite gets a bit of everything: crunchy vegetables, fragrant herbs, and tangy dressing.\n\n## Day 2\n\n**Kao Phat Sapparot (ข้าวผัดสับปะรด) — Pineapple Fried Rice**\nA repeat visit to this coastal classic is well worth it — the sweet pineapple against savory garlic-soy fried rice is a flavor combination deeply tied to the South's coastal food identity. Still gentle on spice (2/5), it's a good grounding dish if you want something familiar on your second day. Notice how the rice grains stay separate and slightly glossy, a sign of good frying technique.\n\n**Kao Yam (ข้าวยำ) — Southern Rice Salad**\nReturning to Kao Yam on Day 2 lets you appreciate its regional variations — ingredients can shift slightly depending on what's fresh, so the herb and vegetable mix may feel a little different from Day 1. This dish remains one of the most distinctly \"Southern\" items on this list, built around sour and salty herbal notes rather than heat. Eat it slowly and notice how the herbs shift the flavor with every bite — it's as much about aroma as taste.",
+      "error": null,
+      "matched_dish_count": 2,
+      "usage": {
+        "prompt_tokens": 659,
+        "completion_tokens": 865,
+        "total_tokens": 1524
+      },
+      "latency_seconds": 10.14,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {},
+        "diet_violations": [
+          "shrimp",
+          "shrimp paste",
+          "fish sauce",
+          "fish"
+        ],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Kao Phat Sapparot",
+          "Kao Yam"
+        ],
+        "day_headings_found": 4,
+        "regions_mentioned": [
+          "South"
+        ],
+        "no_output": false
+      },
+      "cost_usd": 0.009968
+    },
+    "baseline": {
+      "narrative": "# 2-Day Southern Thai Food Adventure 🌶️\n\n## Day 1: Phuket\n\n**Gaeng Som (Sour Curry with Vegetables)**\nThis vibrant yellow curry features turmeric, shallots, and dried chilies with an array of fresh vegetables in a tangy broth. It's a Southern staple that showcases the region's love of bold, complex flavors and coastal influences. Watch for the beautiful golden color and notice how the sourness balances perfectly with the heat!\n\n**Pad Kratiem Phrik Sod (Garlic and Fresh Chili Stir-fry with Vegetables)**\nA simple yet fiery dish of crushed garlic and fresh green chilies stir-fried with seasonal vegetables and served over jasmine rice. This represents the Southern approach of letting quality ingredients shine without heavy sauces. Notice the charred edges on the vegetables—that's the wok's kiss giving it incredible depth!\n\n## Day 2: Krabi\n\n**Massaman Gai (Southern-Style Vegan Massaman)**\nRequest this iconic Southern curry made with chickpeas or tofu instead of chicken, simmered with potatoes, peanuts, and warm spices like cardamom and cinnamon. It beautifully reflects the region's cultural blend and aromatic spice traditions. Notice the rich, creamy texture from the coconut milk and ground peanuts—it's comfort food at its finest!\n\n**Som Tam (Green Papaya Salad - Extra Spicy)**\nThis refreshing yet seriously spicy salad combines shredded green papaya, lime juice, tomatoes, and long beans, pounded with Thai chilies and fresh herbs. It's quintessentially Southern and perfectly captures the region's balance of heat, sourness, and freshness. Notice how the pounding releases all the flavors—every bite should make your taste buds sing!",
+      "error": null,
+      "prompt_used": "You are a Thai food travel guide. Write a short, friendly day-by-day\nThai food itinerary for a traveler with these requirements:\n\n- Regions to visit: South\n- Trip length: 2 day(s)\n- Allergens to strictly avoid: none\n- Maximum spice level: 5 out of 5\n- Dietary requirement: vegan\n\n\nFor each day, recommend 2-3 real Thai dishes that satisfy ALL of the above\nrequirements. For each dish, write 2-4 sentences: what it is, why it fits the\nprovince/region, and one thing to notice about it. Do not claim any specific\nrestaurant, vendor, or price -- just what dishes to seek out.",
+      "usage": {
+        "prompt_tokens": 167,
+        "completion_tokens": 432,
+        "total_tokens": 599
+      },
+      "latency_seconds": 5.57,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {},
+        "diet_violations": [],
+        "diet_negated_mentions": [
+          "chicken"
+        ],
+        "grounded_dishes": [
+          "Som Tam"
+        ],
+        "day_headings_found": 2,
+        "regions_mentioned": [
+          "South"
+        ],
+        "no_output": false
+      },
+      "cost_usd": 0.002327
+    }
+  },
+  {
+    "case": {
+      "id": "mild_northeast",
+      "description": "Spice ceiling that cuts against Isan (Northeast) food's reputation for heat -- tests whether the constraint actually holds.",
+      "regions": [
+        "Northeast"
+      ],
+      "days": 2,
+      "exclude_allergens": [],
+      "max_spice": 1,
+      "diet": "none",
+      "preference_text": ""
+    },
+    "our_model": {
+      "narrative": "# Your 2-Day Isan Food Journey: Testing the Heat Limit\n\nA quick note before we dive in: Isan cuisine is famous worldwide for bold, fiery heat, but your spice ceiling of 1/5 means we're sticking to the gentler end of the region's repertoire. This itinerary is actually a nice test case — it shows that even in the Northeast, not everything is a chili bomb. Here, the same comforting, mild staple appears on both days, which gives you a chance to really sit with it and appreciate the nuances.\n\n## Day 1: Kao Chi (ข้าวจี่)\n\nKao Chi is grilled sticky rice, typically formed into a compact ball or log, brushed with a seasoning of soy sauce and garlic, then toasted over open flame or hot coals until the exterior turns golden and slightly crisp. It's a true rural Isan dish — sticky rice is the backbone of the region's diet, and this preparation turns leftover or freshly steamed rice into a portable, satisfying snack or light meal.\n\nOne thing to notice: the contrast in texture is the real star here — a crackly, charred-edge exterior giving way to a soft, chewy interior, while the soy-garlic glaze delivers savory, umami depth without any heat. It's proof that Isan comfort food doesn't need chili to be deeply flavorful.\n\n## Day 2: Kao Chi (ข้าวจี่)\n\nOn your second day, return to Kao Chi, but treat it as a chance to slow down and notice details you may have rushed past the first time. This grilled sticky rice with soy sauce and garlic remains a staple across rural Northeast Thailand, often enjoyed as an everyday snack rather than a formal meal.\n\nThis time, pay attention to how the aroma of charred rice and toasted garlic builds as it grills — it's as much about the smoky fragrance as the taste. Eaten by hand, in a few warm bites, it's a simple reminder that Isan's culinary identity rests just as much on rice and fire as it does on spice.",
+      "error": null,
+      "matched_dish_count": 1,
+      "usage": {
+        "prompt_tokens": 475,
+        "completion_tokens": 674,
+        "total_tokens": 1149
+      },
+      "latency_seconds": 9.41,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {},
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Kao Chi"
+        ],
+        "day_headings_found": 2,
+        "regions_mentioned": [
+          "Northeast"
+        ],
+        "no_output": false
+      },
+      "cost_usd": 0.00769
+    },
+    "baseline": {
+      "narrative": "# 2-Day Northeast Thai Food Adventure 🌶️\n\n## Day 1: Khon Kaen\n\n**Sticky Rice (Khao Kao)**\nThis glutinous rice is the heart and soul of Isan cuisine, served with almost every meal. It's traditionally eaten by hand, rolled into small balls to accompany dishes. The slightly sweet, chewy texture is mild and comforting—perfect for your spice preference.\n\n**Sai Oua (Northern-Style Sausage)**\nThese herb-filled pork sausages are a beloved Isan staple that can be prepared mild and fragrant rather than fiery. Look for versions made with galangal, lemongrass, and garlic that offer wonderful aroma without intense heat. The crispy exterior gives way to juicy, savory filling.\n\n## Day 2: Udon Thani\n\n**Pad Thai (Mild Version)**\nThis famous stir-fried noodle dish is perfectly adaptable to your heat level—ask for it mild and you'll get sweet, tangy, slightly nutty flavors. Udon Thani serves wonderful versions with shrimp or chicken and topped with crushed peanuts and fresh lime. Notice how the balance of sweet, sour, and savory makes this dish so beloved.\n\n**Larb Gai with Rice (Chicken Version)**\nThis minced meat salad can easily be made very mild—focus on the aromatic herbs like mint and cilantro rather than chili. The chicken version is lighter than pork, with lime juice providing bright acidity. This is an excellent introduction to Isan's famous larb tradition without overwhelming spice.\n\n---\n*Enjoy your Northeast adventure!* 😊",
+      "error": null,
+      "prompt_used": "You are a Thai food travel guide. Write a short, friendly day-by-day\nThai food itinerary for a traveler with these requirements:\n\n- Regions to visit: Northeast\n- Trip length: 2 day(s)\n- Allergens to strictly avoid: none\n- Maximum spice level: 1 out of 5\n- Dietary requirement: none\n\n\nFor each day, recommend 2-3 real Thai dishes that satisfy ALL of the above\nrequirements. For each dish, write 2-4 sentences: what it is, why it fits the\nprovince/region, and one thing to notice about it. Do not claim any specific\nrestaurant, vendor, or price -- just what dishes to seek out.",
+      "usage": {
+        "prompt_tokens": 166,
+        "completion_tokens": 393,
+        "total_tokens": 559
+      },
+      "latency_seconds": 4.86,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {},
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Pad Thai",
+          "Sai Oua"
+        ],
+        "day_headings_found": 2,
+        "regions_mentioned": [
+          "Northeast"
+        ],
+        "no_output": false
+      },
+      "cost_usd": 0.002131
+    }
+  },
+  {
+    "case": {
+      "id": "peanut_egg_vegetarian",
+      "description": "Multi-constraint intersection -- vegetarian AND no peanut AND no egg, across a 4-day trip.",
+      "regions": null,
+      "days": 4,
+      "exclude_allergens": [
+        "peanut",
+        "egg"
+      ],
+      "max_spice": 3,
+      "diet": "vegetarian",
+      "preference_text": ""
+    },
+    "our_model": {
+      "narrative": "# Your 4-Day Vegetarian, Peanut-Free, Egg-Free Thai Food Journey\n\nA gentle, mild-spice tour (nothing above 3/5!) through rice-based dishes from the South, Central, and Northeast of Thailand.\n\n---\n\n## Day 1: Sweet Starts and Smoky Comfort\n\n**Kao Phat Sapparot (ข้าวผัดสับปะรด)** — This vibrant pineapple fried rice comes from Thailand's coastal southern provinces, where pineapple grows abundantly and pairs naturally with rice dishes. The soy sauce and garlic bring umami depth while the pineapple adds bursts of sweetness, creating a lovely sweet-salty contrast. Notice how the rice often takes on a golden hue and the fruit adds juicy texture against the fried grains.\n\n**Kanom Krok (ขนมครก)** — A beloved Bangkok street snack, these little coconut-rice cakes are cooked in a special dimpled pan that gives them a crispy edge and soft, custardy center. The combination of rice flour, coconut milk, and scallion delivers a gentle sweet-umami balance that's comforting without being heavy. Eat them warm, straight from the pan, for the best contrast between the crisp shell and creamy interior.\n\n**Kao Chi (ข้าวจี่)** — Hailing from the rural Northeast, this is grilled sticky rice brushed with soy sauce and garlic, often eaten as a simple, portable meal. Its rustic, smoky char reflects the region's grilling traditions and resourceful rice-based cooking. Notice the chewy, dense texture of the sticky rice contrasted with the charred, savory exterior.\n\n---\n\n## Day 2: Southern Freshness Meets Familiar Favorites\n\n**Kao Yam (ข้าวยำ)** — This vibrant Southern rice salad tosses rice with fresh vegetables and herbs, delivering a bright sour-salty-umami profile typical of Southern Thai cuisine's bold flavors. It's a refreshing dish that showcases the region's love of herbs and raw textures. Notice how the dish is often mixed table-side or just before eating to keep every ingredient crisp.\n\n**Kao Phat Sapparot (ข้าวผัดสับปะรด)** — Enjoy this coastal pineapple fried rice again today, a fitting choice given its roots in the South near Kao Yam's home region. The interplay of sweet pineapple against salty soy and garlic makes it a crowd-pleaser. Pay attention to the textural mix of soft rice and juicy pineapple chunks.\n\n**Kanom Krok (ขนมครก)** — Revisit this Bangkok classic as a sweet afternoon treat. The coconut milk gives it richness while scallion adds a subtle savory note that balances the sweetness. Notice the slight crispness on the cake's edges versus its soft, warm center.\n\n---\n\n## Day 3: Northeast Grit and Southern Zing, Reversed\n\n**Kao Chi (ข้าวจี่)** — Start the day with this Northeastern grilled sticky rice again, perfect as a simple, energizing breakfast. Its soy-garlic glaze and smoky grill marks speak to the rustic, communal food culture of the Isaan region. Notice the satisfying chew of the sticky rice, best eaten warm.\n\n**Kao Yam (ข้าวยำ)** — Return to this Southern rice salad for a palate-refreshing midday dish. The herbs and vegetables create a light, textured contrast to the morning's heavier grilled rice. Notice how the sourness brightens the overall umami base, making it feel cooling despite no ice involved.\n\n**Kao Phat Sapparot (ข้าวผัดสับปะรด)** — Close the day with this sweet-salty pineapple fried rice from the coastal South. It's a comforting, familiar dish by now, letting you appreciate subtle differences in how it's prepared. Notice the garlic's presence in the background, rounding out the sweetness.\n\n---\n\n## Day 4: A Farewell Trio\n\n**Kanom Krok (ขนมครก)** — Begin your final day with this iconic Bangkok coconut-rice snack, a lovely way to ease into the morning with gentle sweetness. The scallion adds a mild aromatic lift to the creamy coconut base. Notice the pan-cooked texture — crisp outside, custardy inside.\n\n**Kao Chi (ข้าวจี่)** — Enjoy this Northeastern grilled sticky rice once more, a humble but satisfying dish that represents Isaan's resourceful, rice-centered cooking. The soy-garlic glaze gives it a savory finish that pairs well as a light meal or snack. Notice the contrast between the chewy rice and the slightly crisp grilled surface.\n\n**Kao Yam (ข้าวยำ)** — End your trip with this refreshing Southern rice salad, a fitting farewell given its bright, herbaceous character. The sour-salty-umami balance offers a flavorful, light send-off. Notice how each bite can taste slightly different depending on the herb-to-rice ratio in your spoonful.\n\n---\n\n*Enjoy your journey through Thailand's rice traditions — from Bangkok's street pans to Isaan's grills and the South's fresh herb markets!* 🍚",
+      "error": null,
+      "matched_dish_count": 4,
+      "usage": {
+        "prompt_tokens": 1282,
+        "completion_tokens": 1807,
+        "total_tokens": 3089
+      },
+      "latency_seconds": 20.67,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {
+          "egg": [
+            "egg"
+          ]
+        },
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Kanom Krok",
+          "Kao Phat Sapparot",
+          "Kao Yam",
+          "Kao Chi"
+        ],
+        "day_headings_found": 4,
+        "regions_mentioned": [],
+        "no_output": false
+      },
+      "cost_usd": 0.020634
+    },
+    "baseline": {
+      "narrative": "# A 4-Day Vegetarian Thai Food Journey: Bangkok & Chiang Mai\n\n## Day 1: Bangkok\n\n**Som Tam (Green Papaya Salad) - Vegetarian Version**\nThis refreshing salad combines shredded green papaya with lime juice, tomatoes, long beans, and mild chilies, all pounded together in a mortar. It's a Bangkok street food staple that can easily be made vegetarian and adjusted to mild spice levels. Watch for the chef to pound the ingredients gently—you want them combined but still textured, not mushy.\n\n**Pad Thai (Thai Stir-Fried Noodles) - Vegetarian Version**\nThis iconic noodle dish features rice noodles stir-fried with tofu, vegetables, garlic, and tamarind sauce. Request it without egg (which is traditional but easy to omit) and ask for mild spice—it's delicious without heat and remains Bangkok's most beloved comfort food. The balance of sweet, sour, and savory is what makes this dish work beautifully.\n\n## Day 2: Bangkok\n\n**Kaeng Jeud (Mild Clear Soup)**\nThis gentle, aromatic soup is made with vegetable broth, tofu, mushrooms, and leafy greens like morning glory. It's the Thai comfort food that won't overwhelm your palate, making it perfect for easing into Thai flavors. Notice how the simplicity lets each ingredient—especially the fragrant garlic—shine through.\n\n**Larb Ped (Duck Salad) - Mushroom Version**\nAsk locals for a vegetarian version using mixed mushrooms instead of duck; this northeastern specialty combines mushrooms with lime, shallots, and herbs like mint and cilantro in a light, tangy dressing. It's served at room temperature and represents Bangkok's love for regional Thai cuisine. The herbaceous freshness is what makes larb addictive—no heat required to make it delicious.\n\n## Day 3: Chiang Mai\n\n**Khao Soi (Chiang Mai Curry Noodles) - Vegetarian Version**\nThis signature northern dish features egg noodles in a mild coconut curry broth topped with crispy noodles and vegetables; request it vegetarian and at mild spice levels. It's deeply associated with Chiang Mai's identity and is eaten for breakfast, lunch, and dinner throughout the city. The contrast between soft noodles in the broth and the crispy fried noodles on top is what makes each spoonful interesting.\n\n**Sai Oua (Northern Sausage) - Vegetarian Version**\nIn Chiang Mai, you can find vegetarian versions of this traditional sausage made with mushrooms, herbs, and spices wrapped in a casing. It's grilled and served with sticky rice and fresh vegetables—a true northern experience. The fragrant herbal flavors (typically including kaffir lime and lemongrass) make it distinctly Chiang Mai, even in its vegetarian form.\n\n## Day 4: Chiang Mai\n\n**Gaeng Hang Lay (Burmese Curry) - Vegetarian Version**\nThis mild, aromatic curry from northern Thailand features tender vegetables and tofu in a peanut-free curry base (request this clearly) with turmeric and garlic. It's a reflection of Chiang Mai's proximity to Burma and its unique culinary heritage. The deep golden color and warming spices create comfort without heat.\n\n**Nam Prik Ong (Tomato & Garlic Dip)**\nThis creamy, mild red dip is made from tomatoes, garlic, and mild chilies, blended smooth and served with fresh vegetables and sticky rice. It's a Chiang Mai specialty that showcases northern Thai simplicity and the beauty of quality ingredients. Notice how the sweetness of cooked tomatoes balances with just a whisper of heat—it's Thai food at its most approachable.\n\n---\n\n**Pro Tips:** Always request dishes \"pet nit noi\" (a little spicy) and clearly state your peanut and egg allergies in advance. Vegetarian options are increasingly available in both cities—don't hesitate to ask!",
+      "error": null,
+      "prompt_used": "You are a Thai food travel guide. Write a short, friendly day-by-day\nThai food itinerary for a traveler with these requirements:\n\n- Regions to visit: any region in Thailand\n- Trip length: 4 day(s)\n- Allergens to strictly avoid: peanut, egg\n- Maximum spice level: 3 out of 5\n- Dietary requirement: vegetarian\n\n\nFor each day, recommend 2-3 real Thai dishes that satisfy ALL of the above\nrequirements. For each dish, write 2-4 sentences: what it is, why it fits the\nprovince/region, and one thing to notice about it. Do not claim any specific\nrestaurant, vendor, or price -- just what dishes to seek out.",
+      "usage": {
+        "prompt_tokens": 174,
+        "completion_tokens": 958,
+        "total_tokens": 1132
+      },
+      "latency_seconds": 9.93,
+      "score": {
+        "allergen_violations": {
+          "egg": [
+            "egg",
+            "egg noodles"
+          ]
+        },
+        "allergen_negated_mentions": {},
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Pad Thai",
+          "Som Tam",
+          "Khao Soi",
+          "Sai Oua",
+          "Nam Prik Ong"
+        ],
+        "day_headings_found": 4,
+        "regions_mentioned": [],
+        "no_output": false
+      },
+      "cost_usd": 0.004964
+    }
+  },
+  {
+    "case": {
+      "id": "craving_sour_funky",
+      "description": "Free-text preference case -- exercises retrieval on the 'our model' side; baseline has no retrieval step at all.",
+      "regions": null,
+      "days": 2,
+      "exclude_allergens": [
+        "crustacean_shellfish"
+      ],
+      "max_spice": 5,
+      "diet": "none",
+      "preference_text": "something sour and funky, lots of fermented flavor"
+    },
+    "our_model": {
+      "narrative": "# Your 2-Day Sour & Funky Thai Food Trail\n\nSince you're craving sour, funky, fermented flavors, here's how the retrieved dishes stack up — honestly, none of these are deep-fermentation dishes like you might be picturing, but a few get close with their sour/umami profiles.\n\n## Day 1: The Northern & Northeastern Sour-Spicy Trio\n\n**Nam Prik Ong (น้ำพริกอ่อง)** – Chiang Mai, North\nThis is a Northern Thai chili-tomato dip made with ground pork, dried chili, garlic, and shallot. It's got that signature Northern balance of spicy, umami, salty, and sour notes — the sourness here likely comes from the tomato base rather than fermentation, but it's a reasonable stand-in for your craving. Worth noting: it's typically eaten with fresh vegetables and sticky rice, so the funk is subtle, not overwhelming.\n\n**Larb Moo (ลาบหมู)** – Khon Kaen, Northeast\nA classic Isan minced pork salad dressed with lime juice, fish sauce, and toasted rice powder. The tang from the lime juice and the salty depth of fish sauce give you a sour-umami combo that's close to what you're after, even without true fermentation. Notice the roasted rice powder — it adds a toasty crunch that balances the acidity.\n\n**Koi (ก้อย)** – Ubon Ratchathani, Northeast\nSimilar in spirit to Larb but made with beef instead of pork, again dressed in lime juice, fish sauce, chili, and fresh herbs. This is a good regional companion to the Larb — Isan cuisine leans hard into sour-salty-spicy combinations, so back-to-back these two dishes really showcase that flavor family. One thing to watch: at 4/5 spice, it's on the hotter end of your limit.\n\n## Day 2: A More Mixed Bag\n\n**Tom Kha Gai (ต้มข่าไก่)** – Bangkok, Central\nA coconut milk soup with chicken, galangal, lemongrass, and lime juice. Honestly, this isn't a close match for the fermented funk you're craving — the sourness here is bright and citrusy (from lime) rather than fermented, and the coconut milk makes it rich and mellow rather than funky. It's included mainly because it cleared your allergy and spice filters, not because it nails your flavor request.\n\n**Gaeng Tai Pla (แกงไตปลา)** – Nakhon Si Thammarat, South\nThis Southern curry uses fermented fish stomach paste as its base, along with fish, eggplant, and bamboo shoots — so in terms of actual fermentation, this is probably your closest match on the whole list, even though its craving score is modest. The flavor profile leans spicy-umami-bitter rather than sour, so it's funky but not tangy. Good one to try if \"funky\" matters more to you than \"sour\" today.\n\n**Kao Chi (ข้าวจี่)** – Rural Northeast\nGrilled sticky rice brushed with soy sauce and garlic — simple, salty, umami comfort food. I'll be straight with you: this doesn't match your sour/fermented craving at all. It's on the list simply because it survived the allergy and spice filters, not because it fits your flavor request. Think of it as a mellow palate-cleanser between the bolder dishes today.\n\n---\n\n**Honest takeaway:** Day 1's Northeastern dishes (Larb Moo, Koi) give you the best sour-forward kick, while Day 2's Gaeng Tai Pla is your best shot at genuine fermented funk — but true deep-fermented dishes (think fermented fish sauces or pickled bamboo as a standalone dish) just didn't surface in this filtered set. If funky fermentation is the priority, Day 2's curry is worth seeking out despite its lower score.",
+      "error": null,
+      "matched_dish_count": 22,
+      "usage": {
+        "prompt_tokens": 1431,
+        "completion_tokens": 1301,
+        "total_tokens": 2732
+      },
+      "latency_seconds": 14.92,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {},
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Koi",
+          "Larb Moo",
+          "Nam Prik Ong",
+          "Gaeng Tai Pla",
+          "Tom Kha Gai",
+          "Kao Chi"
+        ],
+        "day_headings_found": 5,
+        "regions_mentioned": [],
+        "no_output": false
+      },
+      "cost_usd": 0.015872
+    },
+    "baseline": {
+      "narrative": "# A 2-Day Thai Food Adventure: Bangkok & Isaan Region\n\n## Day 1: Bangkok - Fermented Flavors in the City\n\n**Som Tam (Green Papaya Salad) - Isaan Style**\nThis vibrant salad combines shredded green papaya with lime juice, fish sauce, and fresh chilies, delivering that sour and funky punch you're craving. Bangkok's street food stalls prepare this classic with intensity, letting you customize the heat level all the way up to 5/5 if you dare. Watch the vendor pound the ingredients together in a mortar—the aromatics that release are absolutely intoxicating.\n\n**Larb Moo (Minced Pork Salad)**\nA northeastern Thai staple now beloved throughout Bangkok, this dish features minced pork mixed with lime juice, fish sauce, and toasted rice powder for a deeply savory, sour, and earthy experience. The fermented fish sauce provides that funky depth you're seeking, and it pairs beautifully with sticky rice. Notice how the toasted rice powder adds a nutty complexity that ties the sour and savory elements together.\n\n## Day 2: Isaan Region (Udon Thani) - The Heartland of Funk\n\n**Som Tam Poo (Green Papaya with Fermented Crab)**\nWait—while this traditionally includes crab, seek out the version made with just salted fish or ask vendors to prepare it with extra anchovy paste and fermented fish instead. This Isaan specialty delivers intense sour, salty, and funky notes that will absolutely satisfy your craving. The fermented fish creates an umami bomb that's unforgettable.\n\n**Sup Nor Mai (Bamboo Shoot Soup) with Fish Sauce**\nThis comforting soup features fresh bamboo shoots in a aromatic broth seasoned heavily with fermented fish sauce and chilies. Bamboo shoots have a naturally tangy quality that complements the funky fish sauce beautifully, creating layers of sour and umami flavor. Slurp it slowly and notice how the flavors deepen with each spoonful as the fermented elements meld together.\n\n---\n\n*Safe travels, and enjoy the bold, funky flavors of Thailand!*",
+      "error": null,
+      "prompt_used": "You are a Thai food travel guide. Write a short, friendly day-by-day\nThai food itinerary for a traveler with these requirements:\n\n- Regions to visit: any region in Thailand\n- Trip length: 2 day(s)\n- Allergens to strictly avoid: crustacean_shellfish\n- Maximum spice level: 5 out of 5\n- Dietary requirement: none\n- Traveler also mentioned they are craving: \"something sour and funky, lots of fermented flavor\"\n\nFor each day, recommend 2-3 real Thai dishes that satisfy ALL of the above\nrequirements. For each dish, write 2-4 sentences: what it is, why it fits the\nprovince/region, and one thing to notice about it. Do not claim any specific\nrestaurant, vendor, or price -- just what dishes to seek out.",
+      "usage": {
+        "prompt_tokens": 201,
+        "completion_tokens": 516,
+        "total_tokens": 717
+      },
+      "latency_seconds": 6.02,
+      "score": {
+        "allergen_violations": {
+          "crustacean_shellfish": [
+            "crab"
+          ]
+        },
+        "allergen_negated_mentions": {},
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Som Tam",
+          "Larb Moo"
+        ],
+        "day_headings_found": 2,
+        "regions_mentioned": [],
+        "no_output": false
+      },
+      "cost_usd": 0.002781
+    }
+  },
+  {
+    "case": {
+      "id": "craving_comfort_mild",
+      "description": "Second free-text preference case, different region/spice mix, to avoid drawing conclusions from a single craving example.",
+      "regions": [
+        "Central",
+        "North"
+      ],
+      "days": 3,
+      "exclude_allergens": [],
+      "max_spice": 2,
+      "diet": "none",
+      "preference_text": "comforting, mild, like a hug in a bowl"
+    },
+    "our_model": {
+      "narrative": "Here's your 3-day comfort-food itinerary — with an honest heads-up first: even though you asked for a North + Central mix, every dish that survived your allergy/spice filters turned out to be from Bangkok (Central). There was nothing retrieved from the North this time, and the same three dishes repeat all three days since that's all the filtered pool had to offer. Also worth noting: none of these score as a strong match for \"comforting, mild, like a hug in a bowl\" — the highest is only 0.16, so take the ordering as \"best of what's available\" rather than \"great fits.\"\n\n**Day 1 – Bangkok, Central**\n\n1. **Pad Thai (ผัดไทย)** – The classic stir-fried rice noodle dish with shrimp, tofu, egg, peanuts, and bean sprouts in a sweet-sour-salty tamarind sauce. It's a Bangkok street-food icon, so it fits the Central region well, but with its tangy, punchy flavor profile, it's honestly more \"lively\" than \"cozy hug in a bowl\" — it's just the closest thing available after filtering. Notice the balance of textures: soft noodles, crunchy peanuts, and a squeeze of lime usually finishes it off.\n\n2. **Kanom Krok (ขนมครก)** – Small coconut-rice-flour pancakes cooked in a special dimpled pan, crispy on the outside and creamy in the middle. This is a gentler, milder option (spice level 1) and the coconut-sugar sweetness does lean toward \"comforting,\" though it's a snack/dessert rather than a bowl of anything. Notice the contrast between the crisp shell and the soft, custardy center.\n\n3. **Tom Kha Gai (ต้มข่าไก่)** – A coconut-milk chicken soup with galangal, lemongrass, and kaffir lime, which sounds like it should be the coziest \"bowl\" option, but its sour-spicy-umami profile and chili kick push it away from \"mild comfort.\" It's a well-known Central Thai dish, and the lowest craving match of the three — include it only if you want variety rather than pure comfort.\n\n**Day 2 – Bangkok, Central**\nSame three dishes repeat today, since the filtered pool didn't surface new options:\n\n1. **Pad Thai (ผัดไทย)** – Worth having again if you enjoyed it, or consider swapping meal order and starting with Kanom Krok today for a milder start to the day.\n2. **Kanom Krok (ขนมครก)** – Still your mildest, most \"hug-like\" option in texture and sweetness.\n3. **Tom Kha Gai (ต้มข่าไก่)** – Try it chilled-down or request less chili if possible, since its spice and sourness are the main things working against the \"mild comfort\" craving.\n\n**Day 3 – Bangkok, Central**\nAgain, the same trio:\n\n1. **Pad Thai (ผัดไทย)** – A reliable, familiar note to end on, even if it's not a deep craving match.\n2. **Kanom Krok (ขนมครก)** – A nice soft landing for your last day — simple, sweet, and the mildest dish of the whole set.\n3. **Tom Kha Gai (ต้มข่าไก่)** – Round out the trip with this one if you want a warm soup experience, keeping in mind it leans more sour-spicy than the gentle comfort you described.\n\n**Bottom line:** Given the retrieval results, Kanom Krok is consistently your mildest, most \"comforting\" option, while Pad Thai and Tom Kha Gai are included mainly because they're what passed your filters — not because they strongly match \"mild, comforting, hug-in-a-bowl.\" If this itinerary feels repetitive or off-target, it may be worth loosening the region constraint (to actually include North) or revisiting the spice/allergy filters to surface more options.",
+      "error": null,
+      "matched_dish_count": 3,
+      "usage": {
+        "prompt_tokens": 1814,
+        "completion_tokens": 1414,
+        "total_tokens": 3228
+      },
+      "latency_seconds": 17.12,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {},
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Pad Thai",
+          "Tom Kha Gai",
+          "Kanom Krok"
+        ],
+        "day_headings_found": 3,
+        "regions_mentioned": [
+          "Central",
+          "North"
+        ],
+        "no_output": false
+      },
+      "cost_usd": 0.017768
+    },
+    "baseline": {
+      "narrative": "# A Gentle Thai Food Journey: Central & Northern Comfort 🥘\n\n## Day 1: Bangkok (Central Region)\n**Theme: Creamy, Soul-Warming Classics**\n\n**Khao Man Gai** (Poached Chicken Rice)\nThis is Thai comfort food at its most pure—silky poached chicken served over fragrant oil-infused rice with ginger-garlic sauce on the side. It's a Bangkok staple because it's humble, nourishing, and beloved by locals seeking something gentle and restorative. Notice how the broth that cooks the rice absorbs all that subtle chicken flavor, making each bite taste like home.\n\n**Tom Kha Gai** (Coconut Chicken Soup)\nCreamy coconut milk combined with tender chicken, galangal, and a whisper of lime creates the ultimate \"hug in a bowl\"—exactly what you're craving. This mild, velvety soup is perfect for Central Thailand, where coconut is abundant. The sweetness of the coconut naturally balances any spice, and you can request it mild for a silky-smooth experience.\n\n---\n\n## Day 2: Chiang Mai (Northern Region)\n**Theme: Mild Northern Soul Food**\n\n**Khao Soi** (Chiang Mai Curry Noodles)\nThis iconic Northern dish features soft egg noodles in a mild, creamy turmeric-curry broth with chicken, topped with crispy fried noodles for texture contrast. It's the pride of Chiang Mai and represents Northern comfort at its finest—warm, embracing, and deeply satisfying. Ask for it mild, and you'll discover a deeply aromatic, almost velvety sauce that feels nurturing rather than intense.\n\n---\n\n## Day 3: Still in Chiang Mai (Northern Region)\n**Theme: Gentle Northern Specialties**\n\n**Sai Oua** (Northern Sausage) with Sticky Rice\nThese fragrant pork sausages are infused with herbs and spices that are more aromatic than fiery—think ginger, garlic, and lemongrass rather than heat. Paired with sticky rice and mild dipping sauce, it's a comforting, herbaceous experience that showcases Northern flavors without overwhelming your palate. Notice the subtle balance of herbs that make each bite feel like a warm blanket.\n\n**แกงฮังเล** **Gaeng Hang Lay** (Burmese Pork Belly Curry)\nThis rich, mild curry with tender pork belly and peanuts is a Northern treasure with roots in Myanmar. The sauce is deeply savory and slightly sweet, creating pure comfort without heat—it's meant to soothe and nourish. The pork becomes so tender it melts, making this the ultimate gentle, satisfying dish.\n\n---\n\nEnjoy your warm, welcoming journey through Thai comfort food! 🙏",
+      "error": null,
+      "prompt_used": "You are a Thai food travel guide. Write a short, friendly day-by-day\nThai food itinerary for a traveler with these requirements:\n\n- Regions to visit: Central, North\n- Trip length: 3 day(s)\n- Allergens to strictly avoid: none\n- Maximum spice level: 2 out of 5\n- Dietary requirement: none\n- Traveler also mentioned they are craving: \"comforting, mild, like a hug in a bowl\"\n\nFor each day, recommend 2-3 real Thai dishes that satisfy ALL of the above\nrequirements. For each dish, write 2-4 sentences: what it is, why it fits the\nprovince/region, and one thing to notice about it. Do not claim any specific\nrestaurant, vendor, or price -- just what dishes to seek out.",
+      "usage": {
+        "prompt_tokens": 195,
+        "completion_tokens": 666,
+        "total_tokens": 861
+      },
+      "latency_seconds": 7.72,
+      "score": {
+        "allergen_violations": {},
+        "allergen_negated_mentions": {},
+        "diet_violations": [],
+        "diet_negated_mentions": [],
+        "grounded_dishes": [
+          "Khao Soi",
+          "Sai Oua",
+          "Tom Kha Gai"
+        ],
+        "day_headings_found": 3,
+        "regions_mentioned": [
+          "Central",
+          "North"
+        ],
+        "no_output": false
+      },
+      "cost_usd": 0.003525
+    }
+  }
+]

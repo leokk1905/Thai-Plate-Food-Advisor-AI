@@ -27,6 +27,12 @@ TOP_K = 5
 
 
 def load():
+    """Load the precomputed vectors AND their metadata together, since
+    they're two halves of one dataset -- vectors[i] only means something in
+    relation to meta["dishes"][i]. Returning them separately (rather than
+    zipping them into one structure) matches how build_embeddings.py saved
+    them, and keeps the large numpy array out of JSON (which can't hold it
+    efficiently anyway)."""
     if not os.path.exists(VECTORS_PATH) or not os.path.exists(META_PATH):
         sys.exit("No embeddings found. Run build_embeddings.py first.")
     vectors = np.load(VECTORS_PATH)
@@ -40,6 +46,41 @@ def top_matches(query, model, vectors, dishes, k=TOP_K):
     scores = vectors @ query_vec  # vectors are pre-normalized, so this is cosine similarity
     ranked = np.argsort(-scores)[:k]
     return [(dishes[i], float(scores[i])) for i in ranked]
+
+
+def rank_candidates_by_preference(text, model, all_vectors, all_dishes, candidate_dishes):
+    """Retrieval step for RAG itinerary generation.
+
+    `candidate_dishes` is a SUBSET of `all_dishes` (e.g. already passed the
+    deterministic allergen/diet/region/spice filter -- that hard filter must
+    run before this, never after, since embedding similarity cannot be
+    trusted to enforce safety constraints -- see DATA_SOURCES.md / earlier
+    testing). This function only re-ranks within that already-safe subset by
+    relevance to free-text `text`, using each candidate's precomputed vector
+    looked up by en_name (candidates aren't necessarily index-aligned with
+    all_dishes/all_vectors since filtering already dropped rows).
+
+    Returns a list of (dish, score) sorted best-first, same length as
+    candidate_dishes (nothing is dropped here, only reordered).
+    """
+    # assumes en_name is unique across all_dishes (true for this dataset --
+    # sample_dishes.csv was deduped by Thai name when rows were merged in).
+    # If a name collided, this dict comprehension would silently keep only
+    # the LAST matching index -- fine here, but worth knowing if the dataset
+    # ever grows from a source that doesn't guarantee unique names.
+    name_to_index = {d["en_name"]: i for i, d in enumerate(all_dishes)}
+    query_vec = model.encode([text], normalize_embeddings=True)[0]
+
+    scored = []
+    for dish in candidate_dishes:
+        idx = name_to_index.get(dish["en_name"])
+        if idx is None:
+            continue  # shouldn't happen if candidate_dishes really is a subset, but don't crash if it does
+        score = float(all_vectors[idx] @ query_vec)
+        scored.append((dish, score))
+
+    scored.sort(key=lambda pair: -pair[1])
+    return scored
 
 
 def main():

@@ -69,5 +69,24 @@
   "sugar": {"allergens": [], "excludes_diets": []},
   "palm sugar": {"allergens": [], "excludes_diets": []},
   "scallion": {"allergens": [], "excludes_diets": []},
-  "msg": {"allergens": [], "excludes_diets": [], "note": "monosodium glutamate is not classified as a major allergen by FDA or EU; some people report sensitivity but it is not an allergen category tracked here"}
+  "msg": {"allergens": [], "excludes_diets": [], "note": "monosodium glutamate is not classified as a major allergen by FDA or EU; some people report sensitivity but it is not an allergen category tracked here"},
+
+  "crab": {"allergens": ["crustacean_shellfish"], "excludes_diets": ["vegan", "vegetarian"]},
+  "fermented fish": {"allergens": ["fish"], "excludes_diets": ["vegan", "vegetarian"]},
+  "yellow curry paste": {"allergens": ["crustacean_shellfish"], "excludes_diets": ["vegan", "vegetarian"], "confidence": "low", "note": "same caveat as 'curry paste' -- recipes vary on whether shrimp paste is included"},
+  "peanut sauce": {"allergens": ["peanut"], "excludes_diets": []},
+  "oyster omelette": {"allergens": ["molluscs", "egg"], "excludes_diets": ["vegan", "vegetarian"]},
+  "grilled chicken": {"allergens": [], "excludes_diets": ["vegan", "vegetarian", "pescatarian"]},
+  "raw beef salad": {"allergens": [], "excludes_diets": ["vegan", "vegetarian", "pescatarian"]},
+  "grilled beef salad": {"allergens": [], "excludes_diets": ["vegan", "vegetarian", "pescatarian"]},
+  "stewed pork belly": {"allergens": [], "excludes_diets": ["vegan", "vegetarian", "pescatarian"]},
+  "isan sausage": {"allergens": [], "excludes_diets": ["vegan", "vegetarian", "pescatarian"], "confidence": "low", "note": "assumed pork-based (traditional Sai Krok Isan); recipes vary"},
+
+  "meat": {"allergens": [], "excludes_diets": ["vegan", "vegetarian", "pescatarian"], "confidence": "low", "note": "generic term, exact animal unspecified -- found via testing/run_eval.py: being unmatched let a dish literally listing 'Meat' as an ingredient (Sate) get tagged vegan by omission. Excluding all three diets is the conservative default, same as any other unspecified animal flesh."},
+  "spices": {"allergens": [], "excludes_diets": []},
+  "vegetables": {"allergens": [], "excludes_diets": []},
+  "pineapple fried rice": {"allergens": [], "excludes_diets": [], "note": "a rice preparation, not an allergen-relevant ingredient on its own -- any meat/seafood in a specific dish is captured by that dish's other ingredient tokens"},
+  "rice salad": {"allergens": [], "excludes_diets": []},
+  "biryani rice": {"allergens": [], "excludes_diets": []},
+  "grilled sticky rice": {"allergens": [], "excludes_diets": []}
 }

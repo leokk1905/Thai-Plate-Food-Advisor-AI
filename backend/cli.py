@@ -27,6 +27,11 @@ from itinerary.planner import load_dishes, filter_dishes, build_daily_plan, gene
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 REGIONS = ["Central", "North", "Northeast", "South"]
+# Hardcoded here (unlike server.py's /api/meta, which computes this list
+# live from the actual enriched data) because this is a quick terminal demo,
+# not the web page -- if the allergen map grows new categories, this list
+# needs updating by hand to stay in sync. Worth switching to a live
+# computation (same one-liner /api/meta uses) if this script sees more use.
 ALLERGENS = [
     "milk", "egg", "fish", "crustacean_shellfish", "molluscs", "tree_nut",
     "peanut", "wheat", "soybean", "sesame", "mustard", "celery",
@@ -40,6 +45,10 @@ def ask(prompt, options=None):
 
 
 def ask_int(prompt, default):
+    """Keeps re-prompting on bad input instead of crashing -- this used to
+    be a plain `int(ask(...) or default)` call that threw an unhandled
+    ValueError on non-numeric input (e.g. typing "abc" for days), confirmed
+    by actually testing it. This loop is the fix."""
     while True:
         raw = ask(prompt) or str(default)
         try:
@@ -68,6 +77,9 @@ def main():
 
     print(f"Which region(s) are you visiting? Options: {', '.join(REGIONS)}")
     region_input = ask("Comma-separated, or blank for all")
+    # blank input -> "".split(",") -> [""] -> filtered out by `if r.strip()`
+    # -> empty list -> `or None` turns that into None, which filter_dishes()
+    # treats as "no region restriction" rather than "match nothing"
     regions = [r.strip() for r in region_input.split(",") if r.strip()] or None
 
     days = ask_int("How many days is the trip?", 3)
@@ -104,7 +116,7 @@ def main():
     plan = build_daily_plan(filtered, days)
 
     print("\nGenerating your itinerary...\n")
-    narrative = generate_narrative(client, plan, preferences)
+    narrative, _usage = generate_narrative(client, plan, preferences)
     print(narrative)
 
     print("\n---")
