@@ -13,8 +13,12 @@ Architecture (see DATA_SOURCES.md for why):
   "unmatched_ingredients" instead of being silently guessed, so a human can
   extend the map for real coverage instead of trusting an LLM allergen guess.
 
-Usage:
-    ANTHROPIC_API_KEY=... python enrich.py ../data/sample_dishes.csv ../data/enriched_dishes.csv
+Usage (with backend/.env containing OPENROUTER_API_KEY=...):
+    python enrich.py ../data/sample_dishes.csv ../data/enriched_dishes.csv
+
+Calls the model through OpenRouter (https://openrouter.ai), which exposes an
+OpenAI-compatible API in front of many providers including Anthropic -- hence
+using the `openai` SDK here with OpenRouter's base_url, not the `anthropic` SDK.
 """
 
 import csv
@@ -22,9 +26,13 @@ import json
 import os
 import sys
 
-import anthropic
+from openai import OpenAI
+from dotenv import load_dotenv
 
-MODEL = os.environ.get("ENRICH_MODEL", "claude-haiku-4-5-20251001")
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+MODEL = os.environ.get("ENRICH_MODEL", "anthropic/claude-haiku-4.5")
 MAP_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "reference", "ingredient_allergen_map.json")
 
 SYSTEM_PROMPT = """You estimate two subjective qualities of a Thai dish from its name,
@@ -37,15 +45,18 @@ allergens or dietary status -- that is handled separately from a reference table
 Respond using the record_flavor tool."""
 
 TOOL = {
-    "name": "record_flavor",
-    "description": "Record subjective flavor tags for one dish.",
-    "input_schema": {
-        "type": "object",
-        "properties": {
-            "spice_level": {"type": "integer", "minimum": 1, "maximum": 5},
-            "flavor_profile": {"type": "array", "items": {"type": "string"}},
+    "type": "function",
+    "function": {
+        "name": "record_flavor",
+        "description": "Record subjective flavor tags for one dish.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "spice_level": {"type": "integer", "minimum": 1, "maximum": 5},
+                "flavor_profile": {"type": "array", "items": {"type": "string"}},
+            },
+            "required": ["spice_level", "flavor_profile"],
         },
-        "required": ["spice_level", "flavor_profile"],
     },
 }
 
@@ -91,29 +102,28 @@ def lookup_allergens_and_diet(ingredients_str, allergen_map):
 
 
 def infer_flavor(client, en_name, ingredients, course):
-    message = client.messages.create(
+    completion = client.chat.completions.create(
         model=MODEL,
         max_tokens=512,
-        system=SYSTEM_PROMPT,
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": f"Dish: {en_name}\nCourse: {course}\nIngredients: {ingredients}"},
+        ],
         tools=[TOOL],
-        tool_choice={"type": "tool", "name": "record_flavor"},
-        messages=[{
-            "role": "user",
-            "content": f"Dish: {en_name}\nCourse: {course}\nIngredients: {ingredients}",
-        }],
+        tool_choice={"type": "function", "function": {"name": "record_flavor"}},
     )
-    for block in message.content:
-        if block.type == "tool_use":
-            return block.input
-    raise RuntimeError(f"No tool_use block returned for {en_name}")
+    tool_calls = completion.choices[0].message.tool_calls
+    if not tool_calls:
+        raise RuntimeError(f"No tool call returned for {en_name}")
+    return json.loads(tool_calls[0].function.arguments)
 
 
 def main(in_path, out_path):
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
-        sys.exit("Set ANTHROPIC_API_KEY before running enrichment.")
+        sys.exit("Set OPENROUTER_API_KEY (in backend/.env) before running enrichment.")
 
-    client = anthropic.Anthropic(api_key=api_key)
+    client = OpenAI(base_url=OPENROUTER_BASE_URL, api_key=api_key)
     allergen_map = load_allergen_map()
 
     with open(in_path, newline="", encoding="utf-8") as f:

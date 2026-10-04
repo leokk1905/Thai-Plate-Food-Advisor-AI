@@ -10,9 +10,7 @@ import csv
 import os
 import random
 
-import anthropic
-
-MODEL = os.environ.get("PLANNER_MODEL", "claude-sonnet-5")
+MODEL = os.environ.get("PLANNER_MODEL", "anthropic/claude-sonnet-5")
 
 COURSE_SLOTS = ["main dish", "salad", "snack", "dessert"]
 
@@ -102,9 +100,9 @@ province/region, and one thing to notice about it (flavor, texture, how it's
 eaten). Do not claim any specific restaurant, vendor, or price — this version
 of the guide only covers what to seek out, not where."""
 
-    message = client.messages.create(
+    completion = client.chat.completions.create(
         model=MODEL,
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}],
     )
-    return "".join(b.text for b in message.content if b.type == "text")
+    return completion.choices[0].message.content
